@@ -1,0 +1,10 @@
+# Example Terraform variables file
+# Copy this file to terraform.tfvars and fill in your values
+
+project_id   = "your-gcp-project-id"
+region       = "us-central1"
+cluster_name = "gke-multicluster"
+node_count   = 2
+machine_type = "e2-medium"
+preemptible  = true
+env          = "demo"
