@@ -86,6 +86,21 @@ After deployment, the script will display the external IP address. You can acces
 http://EXTERNAL_IP
 ```
 
+### 6. Validate Your Deployment
+
+Run the validation script to check the health of your deployment:
+
+```bash
+./scripts/validate.sh
+```
+
+This script will:
+- ✅ Check cluster connectivity
+- 🔍 Verify GKE cluster status
+- 🕸️ Validate Istio installation
+- 🚀 Check nginx demo application
+- 🌐 Test HTTP connectivity
+
 ## 📁 Repository Structure
 
 ```
@@ -104,6 +119,7 @@ http://EXTERNAL_IP
 │   └── istio-gateway.yaml         # Istio Gateway and VirtualService
 ├── scripts/                 # Automation scripts
 │   ├── deploy.sh            # Main deployment script
+│   ├── validate.sh          # Deployment validation script
 │   └── cleanup.sh           # Cleanup script
 └── README.md               # This file
 ```
