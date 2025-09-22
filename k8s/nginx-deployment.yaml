@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-demo
+  namespace: default
+  labels:
+    app: nginx-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-demo
+  template:
+    metadata:
+      labels:
+        app: nginx-demo
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.21
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /usr/share/nginx/html/index.html
+          subPath: index.html
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx-demo-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-demo-config
+  namespace: default
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>GKE Multicluster Demo</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 40px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+            }
+            .container {
+                background: rgba(255, 255, 255, 0.1);
+                padding: 40px;
+                border-radius: 10px;
+                backdrop-filter: blur(10px);
+            }
+            h1 { color: #fff; }
+            .info { background: rgba(255, 255, 255, 0.2); padding: 20px; border-radius: 5px; margin: 20px 0; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>🚀 GKE Multicluster Demo</h1>
+            <div class="info">
+                <h2>✅ Success!</h2>
+                <p>Your nginx service is running on Google Kubernetes Engine (GKE)</p>
+                <p>🔧 Deployed with Terraform</p>
+                <p>🕸️ Routed through Istio Service Mesh</p>
+                <p>🌐 Accessible via Istio Ingress Gateway</p>
+            </div>
+            <div class="info">
+                <h3>🏗️ Architecture:</h3>
+                <ul>
+                    <li>GKE Cluster (Google Cloud)</li>
+                    <li>Istio Service Mesh</li>
+                    <li>Istio Ingress Gateway</li>
+                    <li>Nginx Service</li>
+                </ul>
+            </div>
+        </div>
+    </body>
+    </html>

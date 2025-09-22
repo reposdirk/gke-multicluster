@@ -1,0 +1,2 @@
+# Istio Base Helm Values
+# This installs the Istio base CRDs and cluster-wide resources

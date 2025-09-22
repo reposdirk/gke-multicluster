@@ -1,0 +1,11 @@
+# Istio Control Plane (istiod) Helm Values
+pilot:
+  env:
+    EXTERNAL_ISTIOD: false
+    PILOT_ENABLE_WORKLOAD_ENTRY_AUTOREGISTRATION: true
+
+global:
+  meshID: mesh1
+  multiCluster:
+    clusterName: gke-multicluster
+  network: network1
